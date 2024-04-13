@@ -34,7 +34,7 @@ use {
 ### Using vim-plug
 
 ```lua
-Plug 'yourgithubusername/neobranch'
+Plug 'nucc/git-select-branch'
 Plug 'nvim-telescope/telescope.nvim'
 ```
 
