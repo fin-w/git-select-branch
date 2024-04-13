@@ -17,3 +17,6 @@ exe "lua package.path = package.path .. ';" . s:lua_rocks_deps_loc . "/lua-?/ini
 
 " Exposes the plugin's functions for use as commands in Neovim.
 command! -nargs=0 GitSelectBranch lua require("git-select-branch").select_branch()
+
+" Bind the SelectGitBranch to <leader>gb keyboard shortcut by default
+exe 'lua vim.api.nvim_set_keymap("n", "<leader>gb", "<cmd>SelectGitBranch<CR>", { noremap = true, silent = true })'
