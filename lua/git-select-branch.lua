@@ -83,4 +83,7 @@ function M.select_branch()
 		:find()
 end
 
+vim.api.nvim_create_user_command("SelectGitBranch", M.select_branch, {})
+vim.api.nvim_set_keymap("n", "<leader>gb", "<cmd>SelectGitBranch<CR>", { noremap = true, silent = true })
+
 return M
