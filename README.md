@@ -1,7 +1,7 @@
 # GitSelectBranch
 
 ## Description
-**GitSelectBranch** is a Neovim plugin designed to enhance your Git workflow. It integrates with Telescope.nvim to allow users to seamlessly list, switch to, or create Git branches directly within Neovim.
+**GitSelectBranch** is a Neovim plugin designed to enhance your Git workflow. It integrates with Telescope.nvim to allow users to seamlessly list, switch to, or create Git branches directly within Neovim. Keyboard shortcut `<leader>gb` also comes as default.
 
 <img width="300" alt="Screenshot 2024-04-13 at 17 52 26" src="https://github.com/Nucc/git-select-branch/assets/327855/e4670f7a-2484-4893-912d-2136201b2f62">
 <img width="300" alt="Screenshot 2024-04-13 at 17 54 16" src="https://github.com/Nucc/git-select-branch/assets/327855/617ae5ad-f8f2-4ffb-9ba2-000b5fa65001">
@@ -45,14 +45,14 @@ After installation, you can use the plugin with the following command:
 :SelectGitBranch
 ```
 
-You can also bind this command to a keyboard shortcut in your init.vim or init.lua:
+You can also execute this command by <leader>gb or bind it to a keyboard shortcut in your init.vim or init.lua:
 
 ```
-nnoremap <leader>gb :SelectGitBranch<CR>
+nnoremap <leader>Gs :SelectGitBranch<CR>
 ```
 
 ```lua
-vim.api.nvim_set_keymap('n', '<leader>gb', '<cmd>SelectGitBranch<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>Gs', '<cmd>SelectGitBranch<CR>', { noremap = true, silent = true })
 ```
 
 ## Configuration
