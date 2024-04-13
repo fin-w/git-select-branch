@@ -45,7 +45,7 @@ After installation, you can use the plugin with the following command:
 :SelectGitBranch
 ```
 
-You can also execute this command by <leader>gb or bind it to a keyboard shortcut in your init.vim or init.lua:
+You can also execute this command by `<leader>gb` or bind it to a keyboard shortcut in your init.vim or init.lua:
 
 ```
 nnoremap <leader>Gs :SelectGitBranch<CR>
