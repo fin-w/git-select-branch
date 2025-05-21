@@ -21,7 +21,7 @@ local function get_branches()
     for branch in handle:lines() do
         branch = trim(branch:gsub("^%*%s", ""))
         if branch == current_branch then
-            branch = "➤ " .. branch -- You can also use color here if you prefer
+            branch = "% " .. branch -- You can also use color here if you prefer
         end
         table.insert(branches, branch)
     end
@@ -30,7 +30,7 @@ local function get_branches()
 end
 
 local function checkout_branch(branch)
-    branch = branch:gsub("➤ ", "") -- Remove the current branch indicator if present
+    branch = branch:gsub("% ", "") -- Remove the current branch indicator if present
     if branch then
         local check_branch_exists = vim.fn.system("git rev-parse --verify " .. branch)
         if vim.v.shell_error == 0 then
