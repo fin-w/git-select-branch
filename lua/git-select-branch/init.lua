@@ -30,16 +30,18 @@ local function get_branches()
 end
 
 local function checkout_branch(branch)
-    branch = branch:gsub("% ", "") -- Remove the current branch indicator if present
+    branch = branch:gsub("% ", "")          -- Remove the current branch indicator if present
+    local file_dir = vim.fn.expand('%:p:h') -- Get the directory of the current file
+    local cmd = "cd " .. file_dir .. " && git rev-parse --abbrev-ref HEAD"
     if branch then
-        local check_branch_exists = vim.fn.system("git rev-parse --verify " .. branch)
+        local check_branch_exists = vim.fn.system("cd " .. file_dir .. " && git rev-parse --verify " .. branch)
         if vim.v.shell_error == 0 then
             print("Switching to existing branch: " .. branch)
-            vim.fn.system("git checkout " .. branch)
+            vim.fn.system("cd " .. file_dir .. " && git checkout " .. branch)
         else
             if vim.fn.confirm("Branch does not exist. Create it?", "&Yes\n&No", 1) == 1 then
                 print("Creating and switching to new branch: " .. branch)
-                vim.fn.system("git checkout -b " .. branch)
+                vim.fn.system("cd " .. file_dir .. " && git checkout -b " .. branch)
             else
                 print("Operation cancelled.")
             end
