@@ -10,10 +10,14 @@ local function trim(s)
     return s:match("^%s*(.-)%s*$")
 end
 
+
 local function get_branches()
     local branches = {}
-    local current_branch = vim.fn.systemlist("git rev-parse --abbrev-ref HEAD")[1]
-    local handle = io.popen("git branch --list")
+    local file_dir = vim.fn.expand('%:p:h') -- Get the directory of the current file
+    local cmd = "cd " .. file_dir .. " && git rev-parse --abbrev-ref HEAD"
+    local current_branch = vim.fn.systemlist(cmd)[1]
+
+    local handle = io.popen("cd " .. file_dir .. " && git branch --list")
     for branch in handle:lines() do
         branch = trim(branch:gsub("^%*%s", ""))
         if branch == current_branch then
