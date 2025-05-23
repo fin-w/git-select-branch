@@ -22,6 +22,8 @@ local function get_branches()
         branch = trim(branch:gsub("^%*%s", ""))
         if branch == current_branch then
             branch = "% " .. branch -- You can also use color here if you prefer
+        else
+            branch = "  " .. branch -- Add padding to make all branches aligned
         end
         table.insert(branches, branch)
     end
@@ -30,7 +32,8 @@ local function get_branches()
 end
 
 local function checkout_branch(branch)
-    branch = branch:gsub("% ", "")          -- Remove the current branch indicator if present
+    branch = branch:gsub("%", "")           -- Remove the current branch indicator if present
+    branch = trim(branch)                   -- Remove whitespace from the front
     local file_dir = vim.fn.expand('%:p:h') -- Get the directory of the current file
     local cmd = "cd " .. file_dir .. " && git rev-parse --abbrev-ref HEAD"
     if branch then
