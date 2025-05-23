@@ -36,11 +36,7 @@ local function get_branches()
 end
 
 local function checkout_branch(branch)
-    print("for branch: " .. branch)
-    branch = branch:gsub("% ", "")          -- Remove the current branch indicator if present
-    print("1:" .. branch)
-    branch = trim(branch)                   -- Remove whitespace from the front
-    print("2:" .. branch)
+    branch = branch:sub(2)                  -- Remove the current branch indicator / whitespace
     local file_dir = vim.fn.expand('%:p:h') -- Get the directory of the current file
     local cmd = "cd " .. file_dir .. " && git rev-parse --abbrev-ref HEAD"
     if branch then
