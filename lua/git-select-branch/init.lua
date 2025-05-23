@@ -18,22 +18,29 @@ local function get_branches()
     local current_branch = vim.fn.systemlist(cmd)[1]
 
     local handle = io.popen("cd " .. file_dir .. " && git branch --list")
-    for branch in handle:lines() do
-        branch = trim(branch:gsub("^%*%s", ""))
-        if branch == current_branch then
-            branch = "% " .. branch -- You can also use color here if you prefer
-        else
-            branch = "  " .. branch -- Add padding to make all branches aligned
+    if handle then
+        for branch in handle:lines() do
+            branch = trim(branch:gsub("^%*%s", ""))
+            if branch == current_branch then
+                branch = "% " .. branch -- You can also use color here if you prefer
+            else
+                branch = "  " .. branch -- Add padding to make all branches aligned
+            end
+            table.insert(branches, branch)
         end
-        table.insert(branches, branch)
+        handle:close()
+    else
+        print("Failed to list git branches")
     end
-    handle:close()
     return branches
 end
 
 local function checkout_branch(branch)
-    branch = branch:gsub("%", "")           -- Remove the current branch indicator if present
+    print("for branch: " .. branch)
+    branch = branch:gsub("% ", "")          -- Remove the current branch indicator if present
+    print("1:" .. branch)
     branch = trim(branch)                   -- Remove whitespace from the front
+    print("2:" .. branch)
     local file_dir = vim.fn.expand('%:p:h') -- Get the directory of the current file
     local cmd = "cd " .. file_dir .. " && git rev-parse --abbrev-ref HEAD"
     if branch then
